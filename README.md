@@ -4,9 +4,11 @@
 
 [![CI Build](https://github.com/stefanionascu0/mcp_data_protect/actions/workflows/ci.yml/badge.svg)](https://github.com/stefanionascu0/mcp_data_protect/actions)
 [![Vulnerabilities](https://snyk.io/test/github/stefanionascu0/mcp_data_protect/badge.svg)](https://snyk.io/test/github/stefanionascu0/mcp_data_protect)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=https://github.com/stefanionascu0/mcp_data_protect&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=https://github.com/stefanionascu0/mcp_data_protect)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=https://github.com/stefanionascu0/mcp_data_protect&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=https://github.com/stefanionascu0/mcp_data_protect)
-[![Code Coverage](https://codecov.io/gh/stefanionascu0/mcp_data_protect/branch/main/graph/badge.svg)](https://codecov.io/gh/stefanionascu0/mcp_data_protect)
+# Security Rating Badge
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
+# Maintainability Rating Badge
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
+[![Code Coverage](https://codecov.io/gh/stefanionascu0/mcp_data_protect/graph/badge.svg)](https://codecov.io/gh/stefanionascu0/mcp_data_protect)
 
 ### Architecture
 
