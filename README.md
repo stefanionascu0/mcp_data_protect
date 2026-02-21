@@ -1,14 +1,14 @@
-# mcp_data_protect
-
 ### Enterprise-grade Model Context Protocol (MCP) server for secure, local-first LLM integration with proprietary SQL and CSV data.
 
 [![CI Build](https://github.com/stefanionascu0/mcp_data_protect/actions/workflows/ci.yml/badge.svg)](https://github.com/stefanionascu0/mcp_data_protect/actions)
 [![Vulnerabilities](https://snyk.io/test/github/stefanionascu0/mcp_data_protect/badge.svg)](https://snyk.io/test/github/stefanionascu0/mcp_data_protect)
-# Security Rating Badge
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
-# Maintainability Rating Badge
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
-[![Code Coverage](https://codecov.io/gh/stefanionascu0/mcp_data_protect/graph/badge.svg)](https://codecov.io/gh/stefanionascu0/mcp_data_protect)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=coverage)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
+[![Cognitive Complexity](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=cognitive_complexity)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
+[![Duplicated Lines](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
+
 
 ### Architecture
 
@@ -28,6 +28,6 @@
 
 **Audit Logging:** Every interaction is captured via a non-intrusive `@audit_log` decorator, providing ISO-8601 timestamped telemetry for all data access events.
 
-* **Automated Governance**: Integrated with GitHub CodeQL for static analysis and Dependabot for supply chain security, maintaining a permanent "Green CI" state.
+**Automated Governance**: Integrated with GitHub CodeQL for static analysis and Dependabot for supply chain security, maintaining a permanent "Green CI" state.
 
 
