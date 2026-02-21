@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from database import DatabaseCache
+from mcp_data_protect.database import DatabaseCache
 
 def test_singleton_identity():
     # Ensure only one instance exists

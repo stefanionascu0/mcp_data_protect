@@ -6,7 +6,7 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=coverage)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
-[![Cognitive Complexity](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=cognitive_complexity)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
 [![Duplicated Lines](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
 
 
