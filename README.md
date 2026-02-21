@@ -20,7 +20,7 @@ Data privacy focused.
 
 **Dynamic Tooling:** Allows LLMs to execute secure, read-only SQL queries via natural language.
 
-**Audit Logging:** Every query and data access event is logged for compliance.
+**Audit Logging:** Every interaction is captured via a non-intrusive `@audit_log` decorator, providing ISO-8601 timestamped telemetry for all data access events.
 
 * **Automated Governance**: Integrated with GitHub CodeQL for static analysis and Dependabot for supply chain security, maintaining a permanent "Green CI" state.
 
