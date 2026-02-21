@@ -1,8 +1,8 @@
 import pandas as pd 
-from typing import Final
+import threading
+from typing import Final, Optional
 from pydantic import BaseModel, Field, ValidationError
 
-# Configuration: Constant for the data source
 DATA_SOURCE: Final[str] = "company_data.csv"
 
 class Employee(BaseModel):
@@ -10,6 +10,29 @@ class Employee(BaseModel):
     name: str
     clearance_level: str
 
+class DatabaseCache:  # thread safe for RAM caching
+    _instance: Optional["DatabaseCache"] = None
+    _data: Optional[pd.DataFrame] = None
+    _lock = threading.Lock() # only one process to build the cache at a time
+    
+    def __new__(cls):
+        with cls._lock:
+            if cls._instance is None:
+                cls._instance = super().__new__(cls)
+                cls._instance._load_data()
+            return cls._instance
+            
+    def _load_data(self):
+        try:
+            self._data = pd.read_csv(DATA_SOURCE)
+        except FileNotFoundError:
+            self._data = pd.DataFrame(columns=['id', 'name', 'clearance_level']) # empty fallback
+        
+    def get_records(self) -> pd.DataFrame:
+        return self._data
+    
+    
+    
 def get_safe_employee_data() -> pd.DataFrame:
     """
     Fetches the employee dataset and filters for non-sensitive columns.
@@ -17,13 +40,11 @@ def get_safe_employee_data() -> pd.DataFrame:
     Returns:
         pd.DataFrame: A DataFrame containing only safe employee information.
     """
-    try:
-        df = pd.read_csv(DATA_SOURCE)
-        # Make sure salary is never included
-        return df[['id', 'name', 'clearance_level']]
-    except FileNotFoundError:
-            # Return an empty DataFrame with expected columns to maintain consistency
-            return pd.DataFrame(columns=['id', 'name', 'clearance_level'])
+    
+    cache = DatabaseCache()
+    df= cache.get_records()
+    
+    return df [['id', 'name', 'clearance_level']] # filter for safety, ignore salary
     
 def get_employee_by_name(name: str) -> str:
     """
@@ -36,7 +57,7 @@ def get_employee_by_name(name: str) -> str:
         A formatted string results or a descriptive error message.
     """
     try:
-        df = pd.read_csv(DATA_SOURCE)
+        df = get_safe_employee_data() # get cached records
         normalized_name = name.strip().lower()
         mask = df['name'].str.strip().str.lower() == normalized_name
         result = df.loc[mask, ['id', 'name', 'clearance_level']]

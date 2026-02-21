@@ -6,9 +6,15 @@
 
 In 2026, data privacy is the primary barrier to AI adoption.
 
-**Asymmetric Security:** Data stays within the local infrastructure; only metadata and specific query results are shared with the LLM.
+### Architecture
 
-**Robust Integration:** Built using the official MCP Python SDK and SQLAlchemy for database-agnostic performance (SQL, PostgreSQL, CSV).
+**Security:** Asymmetric context injection; Pydantic-enforced schema validation prevents sensitive leakage.
+
+**Data Integrity:** Transactional audit logging and strict type-hinting for robust tool execution.
+
+**Interface:** Decoupled data-layer supporting SQLAlchemy and pandas-backed CSV sources.
+
+**Integration:** Built using the official MCP Python SDK and SQLAlchemy for database-agnostic performance (SQL, PostgreSQL, CSV).
 
 **Zero-Cloud Footprint:** No data is sent to third-party vectors unless explicitly configured.
 
