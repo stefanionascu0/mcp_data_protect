@@ -1,0 +1,4 @@
+id,name,salary,clearance_level
+1,Alice,120000,Top Secret
+2,Bob,75000,Public
+3,Charlie,90,Secret
