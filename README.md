@@ -9,7 +9,8 @@
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
 [![Duplicated Lines](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
 
-
+### RUN SERVER
+`uv run mcp dev src/mcp_data_protect/server.py`
 ### Architecture
 
 **Security:** Asymmetric context injection; Pydantic-enforced schema validation prevents sensitive leakage.

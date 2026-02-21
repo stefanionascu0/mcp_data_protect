@@ -1,7 +1,7 @@
 from mcp.server.fastmcp import FastMCP
 import functools
 import datetime
-from database import DatabaseCache, get_safe_employee_data, get_employee_by_name
+from mcp_data_protect.database import DatabaseCache, get_safe_employee_data, get_employee_by_name
 
 mcp = FastMCP("SecureDataBridge")
 
