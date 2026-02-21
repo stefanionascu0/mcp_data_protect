@@ -1,5 +1,8 @@
 # mcp_data_protect
-Enterprise-grade Model Context Protocol (MCP) server for secure, local-first LLM integration with proprietary SQL and CSV data.
+
+### Enterprise-grade Model Context Protocol (MCP) server for secure, local-first LLM integration with proprietary SQL and CSV data.
+
+**NOTE:** Every line of code typed by a human manually.
 
 In 2026, data privacy is the primary barrier to AI adoption.
 
