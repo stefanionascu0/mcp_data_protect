@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "pip" # uv uses pip-compatible pyproject.toml
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      dependencies:
+        patterns:
+          - "*" # Groups all updates into one PR to reduce noise

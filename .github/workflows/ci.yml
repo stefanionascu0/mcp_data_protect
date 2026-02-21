@@ -1,11 +1,23 @@
-name: CI
-on: [push, pull_request]
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
-      - run: uv sync
-      - run: uv run pytest
-  
+name: CI # Name of the workflow
+on: [push, pull_request] # Trigger on any push or PR to any branch
+
+jobs: # Define the execution units
+  test: # The job ID
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+    steps: # List of tasks to execute
+      - name: Checkout code # Step 1: Pull the repository
+        uses: actions/checkout@v4 # Official GitHub action
+
+      - name: Install uv # Step 2: Set up the uv package manager
+        uses: astral-sh/setup-uv@v5 # Official Astral action
+        with:
+          enable-cache: true # Speeds up subsequent runs
+
+      - name: Set up Python # Step 3: Ensure the correct Python version
+        run: uv python install 3.12 # Matches your pyproject.toml requirement
+
+      - name: Install dependencies # Step 4: Sync the environment
+        run: uv sync --all-extras --dev # Installs production and dev dependencies
+
+      - name: Run Tests # Step 5: Execute the test suite
+        run: uv run pytest # Runs all tests in test_*.py files
