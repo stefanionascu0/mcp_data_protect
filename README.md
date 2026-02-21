@@ -22,4 +22,6 @@ Data privacy focused.
 
 **Audit Logging:** Every query and data access event is logged for compliance.
 
+* **Automated Governance**: Integrated with GitHub CodeQL for static analysis and Dependabot for supply chain security, maintaining a permanent "Green CI" state.
+
 
