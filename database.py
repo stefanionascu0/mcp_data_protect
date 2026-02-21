@@ -17,10 +17,10 @@ class DatabaseCache:  # thread safe for RAM caching
     
     def __new__(cls):
         with cls._lock:
-            if cls._instance is None:
+            if not cls._instance:
                 cls._instance = super().__new__(cls)
                 cls._instance._load_data()
-            return cls._instance
+        return cls._instance
             
     def _load_data(self):
         try:
@@ -29,7 +29,8 @@ class DatabaseCache:  # thread safe for RAM caching
             self._data = pd.DataFrame(columns=['id', 'name', 'clearance_level']) # empty fallback
         
     def get_records(self) -> pd.DataFrame:
-        return self._data
+        with self._lock:
+            return self._data
     
     
     
