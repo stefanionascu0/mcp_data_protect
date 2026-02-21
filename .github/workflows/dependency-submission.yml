@@ -1,0 +1,14 @@
+# .github/workflows/dependency-submission.yml
+name: Dependency Submission
+on:
+  push:
+    branches: ["main"]
+    paths: ["uv.lock"] # Only run when dependencies change
+
+jobs:
+  submission:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Submit Dependencies
+        uses: rmuir/uv-dependency-submission@v1 # Submits uv.lock to GitHub
