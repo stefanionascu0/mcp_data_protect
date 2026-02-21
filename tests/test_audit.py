@@ -1,5 +1,5 @@
 import pytest
-from server import read_company_records
+from mcp_data_protect.server import read_company_records
 
 def test_audit_output(capsys):
 	read_company_records()
