@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest 
     permissions:
       contents: read
+      security-events: write
     steps:  
       - name: Harden Runner
         uses: step-security/harden-runner@v2
@@ -17,7 +18,22 @@ jobs:
       - name: Install uv 
         uses: astral-sh/setup-uv@v5 
         with:
-          enable-cache: true 
+          enable-cache: true
+          
+       - name: Run Tests with Coverage
+       	 run: uv run pytest --cov=. --cov-report=xml
+       	 
+       -name: Snyk Security Scan
+       	uses: snyk/actions/python@master
+       	continue-on-error: true
+       	env:
+       		SNYK_TOKEN ${{ secrets.SNYK_TOKEN }}
+       	
+       	- name: Upload to Codecov
+       		uses: codecov/codecov-action@v5
+       		with: 
+       			token: ${{ secrets.CODECOV_TOKEN }}
+       	
 
       - name: Set up Python 
         run: uv python install 3.12 
