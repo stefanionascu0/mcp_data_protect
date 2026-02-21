@@ -3,7 +3,7 @@ name: Dependency Submission
 on:
   push:
     branches: ["main"]
-    paths: ["uv.lock"] # Only run when dependencies change
+    paths: ["uv.lock"] 
 
 jobs:
   submission:
@@ -11,4 +11,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Submit Dependencies
-        uses: rmuir/uv-dependency-submission@v1 # Submits uv.lock to GitHub
+        uses: rmuir/uv-dependency-submission@v1.0.0 
