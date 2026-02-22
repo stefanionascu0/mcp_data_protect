@@ -11,8 +11,14 @@
 
 ### RUN SERVER
 `uv run mcp dev src/mcp_data_protect/server.py`
-### Architecture
 
+### RUN MIGRATION FROM CSV
+`uv run python src/mcp_data_protect/scripts/migrate_data.py`
+
+### VERIFY DB
+`ls -lh mcp_protected.db`
+
+### Architecture
 **Security:** Asymmetric context injection; Pydantic-enforced schema validation prevents sensitive leakage.
 
 **Data Integrity:** Transactional audit logging and strict type-hinting for robust tool execution.
