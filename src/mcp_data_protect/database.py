@@ -1,83 +1,78 @@
-import pandas as pd 
-import threading
-from typing import Final, Optional
+import os, re
+from typing import Final, Optional, List, Dict
 from pydantic import BaseModel, Field, ValidationError
+from sqlalchemy import create_engine, Column, Integer, String, text
+from sqlalchemy.orm import declarative_base, sessionmaker, Session
 
-DATA_SOURCE: Final[str] = "company_data.csv"
+Base = declarative_base()
+DB_URL = "sqlite:///./mcp_protected.db"
+DB_TABLE_NAME: str = os.getenv("MCP_DB_TABLE", 'employees')
+engine = create_engine(DB_URL, connect_args={"check_same_thread": False}) 
 
-class Employee(BaseModel):
+class Employee(BaseModel): # Pydantic model for data validation
     employee_id: int = Field(alias="id")
     name: str
     clearance_level: str
+    
 
-class DatabaseCache:  # thread safe for RAM caching
-    _instance: Optional["DatabaseCache"] = None
-    _data: Optional[pd.DataFrame] = None
-    _lock = threading.Lock() # only one process to build the cache at a time
+def is_safe_name(name: str) -> bool:
+    # Prevent SQL injection in table/column names
+    return bool(re.match(r"^[a-zA-Z0-9_]+$", name))
+
+# prevents crashes for first-time users with no table
+Base.metadata.create_all(bind=engine)
     
-    def __new__(cls):
-        with cls._lock:
-            if not cls._instance:
-                cls._instance = super().__new__(cls)
-                cls._instance._load_data()
-        return cls._instance
+def get_safe_employee_data() -> List[dict]:
+    """
+    Fetches from SQL db the whole data.
+    """
+    
+    if not is_safe_name(DB_TABLE_NAME):
+        print(f"SECURITY ALERT: Invalid table name attempted: {DB_TABLE_NAME}")
+        return []
+    try:    
+        with engine.connect() as conn:
+            query = text(f"SELECT id, name, clearance_level FROM {DB_TABLE_NAME}")
             
-    def _load_data(self):
-        try:
-            self._data = pd.read_csv(DATA_SOURCE)
-        except FileNotFoundError:
-            self._data = pd.DataFrame(columns=['id', 'name', 'clearance_level']) # empty fallback
+            # TODO: implement generator or pagination for really long db
+            result = conn.execute(query).mappings().all()
+            return [Employee(**row).model_dump() for row in result]
+    except Exception as e:
+        print(f"Database Read Error: {e}") 
+        return []
         
-    def get_records(self) -> pd.DataFrame:
-        with self._lock:
-            return self._data
-    
-    
-    
-def get_safe_employee_data() -> pd.DataFrame:
-    """
-    Fetches the employee dataset and filters for non-sensitive columns.
-    
-    Returns:
-        pd.DataFrame: A DataFrame containing only safe employee information.
-    """
-    
-    cache = DatabaseCache()
-    df= cache.get_records()
-    
-    return df [['id', 'name', 'clearance_level']] # filter for safety, ignore salary
-    
 def get_employee_by_name(name: str) -> str:
     """
-    Queries the data store for a specific employee.
-    
-    Args:
-        name: The target employee name to search for.
-        
-    Returns:
-        A formatted string results or a descriptive error message.
+    Safe data fetcher per employee name
     """
+
+    
+    if not is_safe_name(DB_TABLE_NAME):
+        return "System Error: Security violation in table configuration."
+        
     try:
-        df = get_safe_employee_data() # get cached records
-        normalized_name = name.strip().lower()
-        mask = df['name'].str.strip().str.lower() == normalized_name
-        result = df.loc[mask, ['id', 'name', 'clearance_level']]
-        
-        if result.empty:
-            return f"Search error: No record found for employee '{name}'."
-        
-        user_dict = result.iloc[0].to_dict()
-        validated_user = Employee(**user_dict)
-        
-        return f"Found: {validated_user.name} (ID: {validated_user.employee_id} - Level: {validated_user.clearance_level})"
-        
-    except ValidationError as e:
-        return f"Data Integrity Error: {str(e)}"
+        with engine.connect() as conn:
+            query = text(f"SELECT id, name, clearance_level FROM {DB_TABLE_NAME} WHERE LOWER(name) = LOWER(:n)") # prevents sql injection with placeholder
+            result = conn.execute(query, {"n": name.strip()}).mappings().first()
+            
+            if not result:
+                return f"Search error: No record found for employee '{name}'."
+                
+            validated = Employee(**dict(result))
+            return f"Found: {validated.name} (ID: {validated.employee_id} - Level: {validated.clearance_level})"
     
-    except FileNotFoundError:
-        return f"System Error: Critical data file '{DATA_SOURCE}' not found."
-        
     except Exception as e:
-        return f"System error: An unexpected failure occurred: {str(e)}"
+        return f"System Error: {str(e)}"
+ 
+            
     
+            
+    
+    
+
+    
+    
+
+    
+
 
