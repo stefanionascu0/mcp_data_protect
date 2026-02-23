@@ -20,4 +20,6 @@ jobs:
       run: uv sync --all-extras --dev
     
     - name: Run pylint
-      run: uv run pylint $(git ls-files '*.py')
+      run: uv run pylint $(git ls-files '*.py') --fail-under=8.0
+      
+      
