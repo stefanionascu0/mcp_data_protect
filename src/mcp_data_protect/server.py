@@ -1,7 +1,7 @@
 from mcp.server.fastmcp import FastMCP
 import functools
 import datetime
-from mcp_data_protect.database import DatabaseCache, get_safe_employee_data, get_employee_by_name
+from mcp_data_protect.database import get_safe_employee_data, get_employee_by_name
 
 mcp = FastMCP("SecureDataBridge")
 
@@ -26,10 +26,16 @@ def read_company_records() -> str:
     Returns:
         str: A formatted string of IDs, Names, and Clearance Levels.
     """
-    data = get_safe_employee_data()
-    if data is None or data.empty:
+    data_list = get_safe_employee_data()
+    
+    if not data_list:
         return "System Notification: No records available in the current data store."
-    return data.to_string(index=False)
+    
+    # format data list into clean string for LLM
+    output = "ID | NAME | Clearance Level\n" + "-"*30 + "\n"
+    for emp in data_list:
+        output += f"{emp['employee_id']} | {emp['name']} | {emp['clearance_level']}\n"
+    return output
 
 @audit_log
 @mcp.tool()
@@ -46,7 +52,6 @@ def search_employee(name: str) -> str:
     return get_employee_by_name(name.strip())
     
 if __name__ == "__main__":
-    DatabaseCache() # preload data on startup
     mcp.run()
     
 

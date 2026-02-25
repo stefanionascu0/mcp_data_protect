@@ -9,10 +9,19 @@
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
 [![Duplicated Lines](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
 
+# INSTALL VIRTUAL ENV DEPENDENCIES
+`uv sync
+
+### RUN MIGRATION FROM CSV
+`uv run python -m mcp_data_protect.scripts.migrate_data`
+
 ### RUN SERVER
 `uv run mcp dev src/mcp_data_protect/server.py`
-### Architecture
 
+### VERIFY DB
+`ls -lh mcp_protected.db`
+
+### Architecture
 **Security:** Asymmetric context injection; Pydantic-enforced schema validation prevents sensitive leakage.
 
 **Data Integrity:** Transactional audit logging and strict type-hinting for robust tool execution.
