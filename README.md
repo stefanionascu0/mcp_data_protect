@@ -2,6 +2,7 @@
 
 [![CI Build](https://github.com/stefanionascu0/mcp_data_protect/actions/workflows/ci.yml/badge.svg)](https://github.com/stefanionascu0/mcp_data_protect/actions)
 [![Vulnerabilities](https://snyk.io/test/github/stefanionascu0/mcp_data_protect/badge.svg)](https://snyk.io/test/github/stefanionascu0/mcp_data_protect)
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/stefanionascu0/mcp_data_protect?utm_source=oss&utm_medium=github&utm_campaign=stefanionascu0%2Fmcp_data_protect&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=stefanionascu0_mcp_data_protect&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=stefanionascu0_mcp_data_protect)
