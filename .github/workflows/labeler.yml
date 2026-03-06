@@ -1,0 +1,31 @@
+# Core source changes
+core:
+  - changed-files:
+    - any-glob-to-any-file: 'src/**'
+
+# Test changes
+tests:
+  - changed-files:
+    - any-glob-to-any-file: 'tests/**'
+
+# Documentation
+docs:
+  - changed-files:
+    - any-glob-to-any-file: '**/*.md'
+
+# Dependencies / config
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'pyproject.toml'
+      - 'uv.lock'
+
+# CI/CD and GitHub config
+ci:
+  - changed-files:
+    - any-glob-to-any-file: '.github/**'
+
+# Data files
+data:
+  - changed-files:
+    - any-glob-to-any-file: '**/*.csv'
